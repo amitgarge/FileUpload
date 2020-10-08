@@ -24,7 +24,9 @@ let uploadCloudinary = (req, res) => {
     File.create(file) // save image information in database
 
         .then(newFile => res.json(newFile))
-        .catch(err => logger.error(err, 'userController.uploadCloudinary()', 8))
+
+        .catch(
+            err => logger.error(err, 'userController.uploadCloudinary()', 8))
 }
 
 let showAllFiles = (req, res) => {
@@ -50,28 +52,28 @@ let showAllFiles = (req, res) => {
 
 // start of login function 
 let downloadFile = (req, res) => {
-    if (req.params.id || req.query.id ) {
-    File.findOne({ 'id': req.query.id || req.params.id }, (err, result) => {
-        if (err) {
-            console.log(err)
-            logger.error(err.message, 'User Controller: downloadFile', 10)
-            let apiResponse = response.generate(true, 'Failed To Find file', 500, null)
-            res.send(apiResponse)
-        } else if (check.isEmpty(result)) {
-            logger.info('No File Found', 'User Controller: downloadFile')
-            let apiResponse = response.generate(true, 'No file Found', 404, null);
-            res.send(apiResponse);
-        } else {
-            let url = result.url;
-            let apiResponse = response.generate(false, 'File download success', 200, url)
-            res.send(apiResponse)
-        }
-    })
-} else {
-let apiResponse = response.generate(true, 'ID Missing', 500, null)
-res.send(apiResponse)
-    
-}
+    if (req.params.id || req.query.id) {
+        File.findOne({ 'id': req.query.id || req.params.id }, (err, result) => {
+            if (err) {
+                console.log(err)
+                logger.error(err.message, 'User Controller: downloadFile', 10)
+                let apiResponse = response.generate(true, 'Failed To Find file', 500, null)
+                res.send(apiResponse)
+            } else if (check.isEmpty(result)) {
+                logger.info('No File Found', 'User Controller: downloadFile')
+                let apiResponse = response.generate(true, 'No file Found', 404, null);
+                res.send(apiResponse);
+            } else {
+                let url = result.url;
+                let apiResponse = response.generate(false, 'File download success', 200, url)
+                res.send(apiResponse)
+            }
+        })
+    } else {
+        let apiResponse = response.generate(true, 'ID Missing', 500, null)
+        res.send(apiResponse)
+
+    }
 }
 
 // end of the login function 

@@ -17,17 +17,16 @@ module.exports.setRouter = (app) => {
     /**
      * @apiGroup users
      * @apiVersion  1.0.0
-     * @api {post} /api/v1/users/login api for user login.
+     * @api {post} /api/v1/file/upload api for file Uploading.
      *
-     * @apiParam {string} email email of the user. (body params) (required)
-     * @apiParam {string} password password of the user. (body params) (required)
+     * @apiParam {File} File to be uploaded. (body params) (required) * 
      *
      * @apiSuccess {object} myResponse shows error status, message, http status code, result.
      * 
      * @apiSuccessExample {object} Success-Response:
          {
             "error": false,
-            "message": "Login Successful",
+            "message": "File Successful",
             "status": 200,
             "data": {
                 "authToken": "eyJhbGciOiJIUertyuiopojhgfdwertyuVCJ9.MCwiZXhwIjoxNTIwNDI29tIiwibGFzdE5hbWUiE4In19.hAR744xIY9K53JWm1rQ2mc",
